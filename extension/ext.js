@@ -1,39 +1,26 @@
 let REPORTICLE_currentURL = document.location.href;
-let REPORTICLE_COUNTER = 0;
-setTimeout(REPORTICLE_view, 1000);
+let REPORTICLE_COUNTER = 0; // For display IDs
+setTimeout(REPORTICLE_view, 1000); // Wait for the page to load a bit more
 
+// Main function
+// Checks if and how it should display warnings
 function REPORTICLE_view() {
-    if (REPORTICLE_currentURL == document.location.href) {
-        const url = document.location.href;
-        if (!url.includes("www.facebook.com")) {
+    const url = document.location.href;
+    if (REPORTICLE_currentURL == url) {
+        if (!url.includes("www.facebook.com") && document.location.pathname != "/") {
+            // Normal articles, one warning at the top of the page
             REPORTICLE_getReports(url, REPORTICLE_reportsCallback);
             setTimeout(() => REPORTICLE_addView(REPORTICLE_currentURL), 500);
         }
-        // REPORTICLE_load();
+    }
+    if (url.includes("facebook.com")) {
+        // Facebook, one warning per link post
+        REPORTICLE_tagbook();
     }
 }
 
-// function REPORTICLE_load() {
-    
-    
-//     // const reports = {
-//     //     "views": 400,
-//     //     "reports": 39,
-//     //     "percent": 10,
-//     //     "recommendations": [
-//     //         {
-//     //             "url": "https://www.google.com",
-//     //             "title": "Google"
-//     //         },
-//     //         {
-//     //             "url": "https://www.bing.com",
-//     //             "title": "Bing"
-//     //         }
-//     //     ]
-//     // };
-    
-// }
-
+// Callback for when the article reports are received from the server
+// Formats the data for display
 function REPORTICLE_reportsCallback(reports) {
     console.log("Reports: ", reports);
     let text;
@@ -49,17 +36,20 @@ function REPORTICLE_reportsCallback(reports) {
     REPORTICLE_inject(text, false);
 }
 
+// Short function for document.createElement()
 function REPORTICLE_cEl(type) {
     return document.createElement(type);
 }
 
-
+// Function for injecting the warnings into the pages
+// element and url are only used on facebook where it's not placed in the body
 function REPORTICLE_inject(text, recommendations, element, url) {
     if (!url) {
         url = document.location.href;
     }
     const id = "REPORTICLE_EXT_DIV-" + REPORTICLE_COUNTER++;
 
+    // Create the main divs
     const div = REPORTICLE_cEl("div");
     div.id = id;
     div.style = "width: 100%; background-color: #A8DADC; font-family: sans-serif; display:flex; flex-direction: row;";
@@ -69,6 +59,7 @@ function REPORTICLE_inject(text, recommendations, element, url) {
     div3.id = "REPORTICLE_EXT_DIV3";
     div3.style = "padding: 5px; align-content: center;";
 
+    // The warning text and report button
     const parag = REPORTICLE_cEl("h4");
     parag.innerHTML = text;
     parag.style = "color: #1D3537; margin-top: 15px; margin-left: 15px;";
@@ -83,6 +74,7 @@ function REPORTICLE_inject(text, recommendations, element, url) {
         srcTitle.style = "color: white;";
         const table = REPORTICLE_cEl("table");
         table.style = "padding: 5px;"
+        // Create table with all recommendations
         for (let rec of recommendations) {
             const tr = REPORTICLE_cEl("tr");
             const link = REPORTICLE_cEl("a");
@@ -111,12 +103,14 @@ function REPORTICLE_inject(text, recommendations, element, url) {
     console.log("inject");
 }
 
+// Remove the warning when clicked on report
 function REPORTICLE_deleteInjection(id) {
     console.log(id);
     const div = document.getElementById(id);
     div.parentNode.removeChild(div);
 }
 
+// function called when pressing report button
 function REPORTICLE_reportArticle(id, url) {
     console.log("DOWN!");
     REPORTICLE_deleteInjection(id);

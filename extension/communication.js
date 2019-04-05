@@ -1,6 +1,6 @@
 const REPORTICLE_OUR_URL = "http://localhost:9292";
-// Add the correct paths
 
+// Gets the reports from the server (database)
 function REPORTICLE_getReports(url, callback, transfer, transfer2) {
     const xhr = new XMLHttpRequest();
     xhr.open("get", REPORTICLE_OUR_URL + "/reports");
@@ -18,6 +18,7 @@ function REPORTICLE_getReports(url, callback, transfer, transfer2) {
     xhr.send();
 }
 
+// Send a report about a url (an article) being fake
 function REPORTICLE_report(url) {
     const xhr = new XMLHttpRequest();
     xhr.open("post", REPORTICLE_OUR_URL + "/add_report");
@@ -26,7 +27,7 @@ function REPORTICLE_report(url) {
     xhr.onload = () => {
         if (xhr.readyState === 4) {
             if (xhr.status == 200) {
-                alert("Thank you!");
+                alert("Thank you! Your report has been sent.");
             } else {
                 alert("Error " + xhr.status);
             }
@@ -35,6 +36,8 @@ function REPORTICLE_report(url) {
     xhr.send();
 }
 
+
+// Adds a view to the database to be able to compare it with the reports
 function REPORTICLE_addView(url) {
     const msg = {
         "title": document.title,
@@ -43,9 +46,6 @@ function REPORTICLE_addView(url) {
 
     const xhr = new XMLHttpRequest();
     xhr.open("post", REPORTICLE_OUR_URL + "/add_view");
-    // xhr.setRequestHeader("VIEW_URL", url);
-    // console.log(document.title);
-    // xhr.setRequestHeader("VIEW_TITLE", String(document.title));
     xhr.onerror = () => console.error("Could not reach server");
     xhr.onload = () => {
         if (xhr.status == 200) {
