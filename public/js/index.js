@@ -23,7 +23,7 @@ function addReport() {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("POST", "/add_report", true);
     xmlHttp.setRequestHeader("REPORT_URL", 
-        "https://reddit.com/r/LateStageCapitalism"
+        "https://www.reddit.com/r/worldnews/comments/b9c5nd/when_mueller_submitted_his_report_on_russian/"
     );
     xmlHttp.onload = function(e) {
         if (xmlHttp.readyState === 4) {

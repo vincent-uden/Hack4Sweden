@@ -19,15 +19,11 @@ class App < Sinatra::Base
 
   post '/add_view' do
     url = request.env["HTTP_VIEW_URL"]
-    query = "SELECT * FROM articles"
-    views = (Database.execute query)
-    ap views
-    views.select! { |row| row["url"] == url}
-    views = views[0]
-    p views
-    if views != nil
-      id = views["id"]
-      views = views["views"]
+    rows = Database.get_article_by_url url
+    row = rows[0]
+    if row != nil
+      id = row["id"]
+      views = row["views"]
     else
       # New website
       name = request.env["HTTP_VIEW_TITLE"]
@@ -42,8 +38,11 @@ class App < Sinatra::Base
 
   # TODO! NO WORKIE!!!!! IT GO NIL[] ERROR
   post '/add_report' do
-    url = request.env["HTTP_REPORT_URL"]
-    reports = (Database.execute "SELECT reports FROM articles WHERE url = #{"\"" + url + "\""}")[0]["reports"]
-    Database.execute "UPDATE articles SET reports = #{reports + 1} WHERE url = #{"\"" + url + "\""}"
+    url     = request.env["HTTP_REPORT_URL"]
+    rows    = Database.get_article_by_url url
+    article = rows[0]
+    reports = article["reports"]
+    id      = article["id"]
+    Database.execute "UPDATE articles SET reports = #{reports + 1} WHERE id = #{id}"
   end
 end
