@@ -11,9 +11,25 @@ class App < Sinatra::Base
 
   post '/add_view' do
     url = request.env["HTTP_VIEW_URL"]
-    views = (Database.execute "SELECT views FROM articles WHERE url = #{"\"" + url + "\""}")[0]["views"]
+    query = "SELECT * FROM articles"
+    views = (Database.execute query)
+    ap views
+    views.select! { |row| row["url"] == url}
+    views = views[0]
     p views
-    Database.execute "UPDATE articles SET views = #{views + 1} WHERE url = #{"\"" + url + "\""}"
+    if views != nil
+      id = views["id"]
+      views = views["views"]
+    else
+      # New website
+      name = request.env["HTTP_VIEW_TITLE"]
+      Database.execute "INSERT INTO articles (name, url, reports, views) VALUES (?, ?, ?, ?)", [name, url, 0, 0]
+      result = Database.execute "SELECT * FROM articles ORDER BY id DESC LIMIT 1"
+      result = result[0]
+      id = result["id"]
+      views = 0
+    end
+    Database.execute "UPDATE articles SET views = #{views + 1} WHERE id = ?", id
   end
 
   post '/add_report' do
