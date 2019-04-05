@@ -25,7 +25,9 @@ class App < Sinatra::Base
   # end
 
   post '/add_view' do
-    url = request.env["HTTP_VIEW_URL"]
+    resp = JSON.parse(request.body.read)
+    # url = request.env["HTTP_VIEW_URL"]
+    url = resp["url"]
     rows = Database.get_article_by_url url
     row = rows[0]
     if row != nil
@@ -33,7 +35,8 @@ class App < Sinatra::Base
       views = row["views"]
     else
       # New website
-      name = request.env["HTTP_VIEW_TITLE"]
+      # name = request.env["HTTP_VIEW_TITLE"]
+      name = resp["title"]
       Database.execute "INSERT INTO articles (name, url, reports, views) VALUES (?, ?, ?, ?)", [name, url, 0, 0]
       result = Database.execute "SELECT * FROM articles ORDER BY id DESC LIMIT 1"
       result = result[0]

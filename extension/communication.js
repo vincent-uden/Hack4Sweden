@@ -36,11 +36,16 @@ function REPORTICLE_report(url) {
 }
 
 function REPORTICLE_addView(url) {
+    const msg = {
+        "title": document.title,
+        "url": url
+    };
+
     const xhr = new XMLHttpRequest();
     xhr.open("post", REPORTICLE_OUR_URL + "/add_view");
-    xhr.setRequestHeader("VIEW_URL", url);
-    console.log(document.title);
-    xhr.setRequestHeader("VIEW_TITLE", document.title);
+    // xhr.setRequestHeader("VIEW_URL", url);
+    // console.log(document.title);
+    // xhr.setRequestHeader("VIEW_TITLE", String(document.title));
     xhr.onerror = () => console.error("Could not reach server");
     xhr.onload = () => {
         if (xhr.status == 200) {
@@ -49,5 +54,5 @@ function REPORTICLE_addView(url) {
             console.error("Error " + xhr.status);
         }
     };
-    xhr.send();
+    xhr.send(JSON.stringify(msg));
 }
