@@ -1,3 +1,7 @@
 h1 We expose fake news
 - for a in @articles
   p ="#{a.get_name} | #{a.get_url} | #{a.get_reports}"
+button onclick="sendRequest()" Send Request
+button onclick="addReport()" Add Report
+button onclick="addView()" Add View
+script src="/js/index.js"

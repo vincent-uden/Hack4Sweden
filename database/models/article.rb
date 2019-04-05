@@ -1,3 +1,5 @@
+require_relative '../../database/database'
+
 class Article < Table
   table_name 'articles'
   column :id, :int, :prim_key

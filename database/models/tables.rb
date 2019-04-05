@@ -133,7 +133,8 @@ class Table
     if options[:limit]
       query += "LIMIT #{options[:limit]} "
     end
-    query += ";"
+    #query += ";"
+    query = query[0..-2]
     if options[:debug]
       p query
     end

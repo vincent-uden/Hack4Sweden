@@ -3,6 +3,12 @@ class Database
   @db.results_as_hash = true
 
   def self.execute(*args)
-    @db.execute(*args)
+    p "EXECUTE"
+    p args
+    @db.execute(args[0], args[1])
+  end
+
+  def self.db
+    @db
   end
 end
