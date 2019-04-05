@@ -1,7 +1,7 @@
-const OUR_URL = "http://localhost:9292";
+const REPORTICLE_OUR_URL = "http://localhost:9292";
 // Add the correct paths
 
-function REPORTICLE_getReports(url) {
+function REPORTICLE_getReports(url, callback) {
     const xhr = new XMLHttpRequest();
     xhr.open("get", OUR_URL + "/reports");
     xhr.setRequestHeader("REPORT_URL", url);
@@ -10,7 +10,7 @@ function REPORTICLE_getReports(url) {
         if (xhr.status == 200) {
             const response = xhr.response;
             console.log(xhr.status, response);
-            return JSON.parse(response);
+            callback(JSON.parse(response));
         } else {
             alert("Error " + xhr.status);
         }
@@ -24,10 +24,13 @@ function REPORTICLE_report(url) {
     xhr.setRequestHeader("REPORT_URL", url);
     xhr.onerror = () => alert("Could not reach server");
     xhr.onload = () => {
-        if (xhr.status == 200) {
-            alert("Thank you!");
-        } else {
-            alert("Error " + xhr.status);
+        if (xhr.readyState === 4) {
+            if (xhr.status == 200) {
+                console.log(xhr.responseText);
+                alert("Thank you!");
+            } else {
+                alert("Error " + xhr.status);
+            }
         }
     };
     xhr.send();

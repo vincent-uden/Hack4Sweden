@@ -8,14 +8,21 @@ class App < Sinatra::Base
     url = request.env["HTTP_REPORT_URL"]
     articles = Database.execute("SELECT * FROM articles")
     articles.select! { |row| row["url"] == url}
-    resp = {
-      url: articles[0]["url"],
-      title: articles[0]["name"]
-    }.to_json
-    p "RESP: #{resp}"
-    # return resp
-    return "RESPONSE!!!!!!"
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    # {
+    #   url: articles[0]["url"],
+    #   title: articles[0]["name"]
+    # }.to_json
+    articles[0].to_json
+    # p "RESP: #{resp}"
+    # # return resp
+    # return "RESPONSE!!!!!!"
   end
+
+  # get '/hello' do
+  #   response.headers["Access-Control-Allow-Origin"] = "*"
+  #   return "Hello!"
+  # end
 
   post '/add_view' do
     url = request.env["HTTP_VIEW_URL"]
