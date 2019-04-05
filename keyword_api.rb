@@ -19,6 +19,9 @@ def get_response(url)
 end
 
 def parse_response(response_hash)
+  unless response_hash
+    return []
+  end
   if response_hash["coarseTopics"]
     coarse_topic = response_hash["coarseTopics"][0]["label"]
   end
