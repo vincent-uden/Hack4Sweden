@@ -1,33 +1,38 @@
 let REPORTICLE_currentURL = document.location.href;
+let REPORTICLE_COUNTER = 0;
 setTimeout(REPORTICLE_view, 1000);
 
 function REPORTICLE_view() {
     if (REPORTICLE_currentURL == document.location.href) {
-        REPORTICLE_load();
-        setTimeout(() => REPORTICLE_addView(REPORTICLE_currentURL), 500);
+        const url = document.location.href;
+        if (!url.includes("www.facebook.com")) {
+            REPORTICLE_getReports(url, REPORTICLE_reportsCallback);
+            setTimeout(() => REPORTICLE_addView(REPORTICLE_currentURL), 500);
+        }
+        // REPORTICLE_load();
     }
 }
 
-function REPORTICLE_load() {
-    const url = document.location.href;
-    REPORTICLE_getReports(url, REPORTICLE_reportsCallback);
-    // const reports = {
-    //     "views": 400,
-    //     "reports": 39,
-    //     "percent": 10,
-    //     "recommendations": [
-    //         {
-    //             "url": "https://www.google.com",
-    //             "title": "Google"
-    //         },
-    //         {
-    //             "url": "https://www.bing.com",
-    //             "title": "Bing"
-    //         }
-    //     ]
-    // };
+// function REPORTICLE_load() {
     
-}
+    
+//     // const reports = {
+//     //     "views": 400,
+//     //     "reports": 39,
+//     //     "percent": 10,
+//     //     "recommendations": [
+//     //         {
+//     //             "url": "https://www.google.com",
+//     //             "title": "Google"
+//     //         },
+//     //         {
+//     //             "url": "https://www.bing.com",
+//     //             "title": "Bing"
+//     //         }
+//     //     ]
+//     // };
+    
+// }
 
 function REPORTICLE_reportsCallback(reports) {
     console.log("Reports: ", reports);
@@ -49,14 +54,19 @@ function REPORTICLE_cEl(type) {
 }
 
 
-function REPORTICLE_inject(text, recommendations) {
+function REPORTICLE_inject(text, recommendations, element, url) {
+    if (!url) {
+        url = document.location.href;
+    }
+    const id = "REPORTICLE_EXT_DIV-" + REPORTICLE_COUNTER++;
+
     const div = REPORTICLE_cEl("div");
-    div.id = "EXTENSION_WHOO_DIV";
+    div.id = id;
     div.style = "width: 100%; background-color: #313131; padding: 15px; font-family: sans-serif; display:flex; flex-direction: row";
     const div2 = REPORTICLE_cEl("div");
-    div2.id = "EXTENSION_WHOO_DIV2";
+    // div2.id = "REPORTICLE_EXT_DIV2";
     const div3 = REPORTICLE_cEl("div");
-    div3.id = "EXTENSION_WHOO_DIV3";
+    // div3.id = "REPORTICLE_EXT_DIV3";
     div3.style = "padding: 5px; align-content: center;";
 
     const parag = REPORTICLE_cEl("h4");
@@ -65,7 +75,7 @@ function REPORTICLE_inject(text, recommendations) {
     const rdown = REPORTICLE_cEl("h6");
     rdown.innerHTML = "Report for being factually incorrect";
     rdown.style = "background-color: red; cursor: pointer; padding: 5px; color: white;";
-    rdown.onclick = REPORTICLE_reportArticle;
+    rdown.onclick = () => REPORTICLE_reportArticle(id, url);
 
     if (recommendations) {
         const srcTitle = REPORTICLE_cEl("h6");
@@ -91,18 +101,24 @@ function REPORTICLE_inject(text, recommendations) {
     div.appendChild(div2);
     div.appendChild(div3);
 
-    const body = document.querySelector("body");
-    body.insertBefore(div, body.children[0]);
+    if (element) {
+        element.appendChild(div, element);
+    } else {
+        const body = document.querySelector("body");
+        body.insertBefore(div, body.children[0]);
+    }
+    
     console.log("inject");
 }
 
-function REPORTICLE_deleteInjection() {
-    const div = document.getElementById("EXTENSION_WHOO_DIV");
+function REPORTICLE_deleteInjection(id) {
+    console.log(id);
+    const div = document.getElementById(id);
     div.parentNode.removeChild(div);
 }
 
-function REPORTICLE_reportArticle() {
+function REPORTICLE_reportArticle(id, url) {
     console.log("DOWN!");
-    REPORTICLE_deleteInjection();
-    REPORTICLE_report(document.location.href);
+    REPORTICLE_deleteInjection(id);
+    REPORTICLE_report(url);
 }

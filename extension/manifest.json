@@ -10,11 +10,13 @@
                 "*://www.foxnews.com/*",
                 "*://www.reddit.com/r/worldnews/comments/*",
                 "*://www.msnbc.com/*",
-                "*://www.nbcnews.com/*"
+                "*://www.nbcnews.com/*",
+                "*://www.facebook.com/*"
             ],
             "js": [
                 "communication.js",
-                "ext.js"
+                "ext.js",
+                "facebook.js"
             ]
         }
     ],

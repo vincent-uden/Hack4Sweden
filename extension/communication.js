@@ -1,7 +1,7 @@
 const REPORTICLE_OUR_URL = "http://localhost:9292";
 // Add the correct paths
 
-function REPORTICLE_getReports(url, callback) {
+function REPORTICLE_getReports(url, callback, transfer, transfer2) {
     const xhr = new XMLHttpRequest();
     xhr.open("get", REPORTICLE_OUR_URL + "/reports");
     xhr.setRequestHeader("REPORT_URL", url);
@@ -10,7 +10,7 @@ function REPORTICLE_getReports(url, callback) {
         if (xhr.status == 200) {
             const response = xhr.response;
             console.log(xhr.status, response);
-            callback(JSON.parse(response));
+            callback(JSON.parse(response), transfer, transfer2);
         } else {
             alert("Error " + xhr.status);
         }
