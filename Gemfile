@@ -8,3 +8,5 @@ gem 'rerun'
 gem 'awesome_print'
 gem 'byebug'
 gem 'irb'
+
+gem 'faraday'
