@@ -1,7 +1,29 @@
-h1 We expose fake news
-- for a in @articles
-  p ="#{a.get_name} | #{a.get_url} | #{a.get_reports} | #{a.get_views}"
-button onclick="sendRequest()" Send Request
-button onclick="addReport()" Add Report
-button onclick="addView()" Add View
-script src="/js/index.js"
+link rel="stylesheet" href="/css/main.css"
+
+div#banner
+    h1#page-title Reporticle
+    div#slogan
+        h4 ="- A Chrome extension that lets you enchance"
+        h4#lower true information by reporting articles
+    div#img-cont
+        img#article src="/img/articleWhite.png" alt="article"
+
+button id="download" Download
+button id="down"
+img.arrow src="/img/whiteArrow.png" alt="arrow"
+div.front-page-text
+    div.left 
+        h2.left This is Reporticle.
+        p.left Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+    img.blue-images src="/img/articleBlue.png" alt="articleBlue"
+    img.blue-images src="/img/fakeWebsiteBlue.png" alt="fakeWebsiteBlue"
+    div.right
+        h2.right The problem with fake news.
+        p.right Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+    div.left
+        h2.left Lets encourage facts.
+        p.left Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+    img.blue-images src="/img/checkBlue.png" alt="checkBlue"
+div#footer
+    img#github src="/img/github.png" alt="githubIcon" onclick="navigate(github_url)"
+    p#footer-text vincent-uden/Hack4Sweden
