@@ -62,19 +62,19 @@ function REPORTICLE_inject(text, recommendations, element, url) {
 
     const div = REPORTICLE_cEl("div");
     div.id = id;
-    div.style = "width: 100%; background-color: #313131; padding: 15px; font-family: sans-serif; display:flex; flex-direction: row";
+    div.style = "width: 100%; background-color: #A8DADC; font-family: sans-serif; display:flex; flex-direction: row;";
     const div2 = REPORTICLE_cEl("div");
-    // div2.id = "REPORTICLE_EXT_DIV2";
+    div2.id = "REPORTICLE_EXT_DIV2";
     const div3 = REPORTICLE_cEl("div");
-    // div3.id = "REPORTICLE_EXT_DIV3";
+    div3.id = "REPORTICLE_EXT_DIV3";
     div3.style = "padding: 5px; align-content: center;";
 
     const parag = REPORTICLE_cEl("h4");
     parag.innerHTML = text;
-    parag.style = "color: white; margin-bottom: 5px;";
+    parag.style = "color: #1D3537; margin-top: 15px; margin-left: 15px;";
     const rdown = REPORTICLE_cEl("h6");
     rdown.innerHTML = "Report for being factually incorrect";
-    rdown.style = "background-color: red; cursor: pointer; padding: 5px; color: white;";
+    rdown.style = "background-color: #E63946; cursor: pointer; padding: 5px; color: white; border-radius: 10px; border: 5px solid #E63946; display: inline-block; box-shadow: 0px 2px 5px 0px #00000057; margin-left: 15px; margin-bottom: 15px; margin-top: 5px;";
     rdown.onclick = () => REPORTICLE_reportArticle(id, url);
 
     if (recommendations) {
