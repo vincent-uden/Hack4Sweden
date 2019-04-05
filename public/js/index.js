@@ -60,3 +60,10 @@ function addView() {
     };
     xmlHttp.send();
 }
+
+const stats_url = "/stats";
+const github_url = "https://github.com/vincent-uden/Hack4Sweden";
+
+function navigate(url) {
+    window.location.href = url;
+}
