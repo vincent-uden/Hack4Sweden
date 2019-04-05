@@ -3,7 +3,7 @@ const REPORTICLE_OUR_URL = "http://localhost:9292";
 
 function REPORTICLE_getReports(url, callback) {
     const xhr = new XMLHttpRequest();
-    xhr.open("get", OUR_URL + "/reports");
+    xhr.open("get", REPORTICLE_OUR_URL + "/reports");
     xhr.setRequestHeader("REPORT_URL", url);
     xhr.onerror = () => alert("Could not reach server");
     xhr.onload = () => {
@@ -20,13 +20,12 @@ function REPORTICLE_getReports(url, callback) {
 
 function REPORTICLE_report(url) {
     const xhr = new XMLHttpRequest();
-    xhr.open("post", OUR_URL + "/add_report");
+    xhr.open("post", REPORTICLE_OUR_URL + "/add_report");
     xhr.setRequestHeader("REPORT_URL", url);
     xhr.onerror = () => alert("Could not reach server");
     xhr.onload = () => {
         if (xhr.readyState === 4) {
             if (xhr.status == 200) {
-                console.log(xhr.responseText);
                 alert("Thank you!");
             } else {
                 alert("Error " + xhr.status);
@@ -38,8 +37,9 @@ function REPORTICLE_report(url) {
 
 function REPORTICLE_addView(url) {
     const xhr = new XMLHttpRequest();
-    xhr.open("post", OUR_URL + "/add_view");
+    xhr.open("post", REPORTICLE_OUR_URL + "/add_view");
     xhr.setRequestHeader("VIEW_URL", url);
+    console.log(document.title);
     xhr.setRequestHeader("VIEW_TITLE", document.title);
     xhr.onerror = () => console.error("Could not reach server");
     xhr.onload = () => {

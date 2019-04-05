@@ -3,8 +3,8 @@ setTimeout(REPORTICLE_view, 1000);
 
 function REPORTICLE_view() {
     if (REPORTICLE_currentURL == document.location.href) {
-        REPORTICLE_addView(REPORTICLE_currentURL);
         REPORTICLE_load();
+        setTimeout(() => REPORTICLE_addView(REPORTICLE_currentURL), 500);
     }
 }
 
@@ -31,19 +31,17 @@ function REPORTICLE_load() {
 
 function REPORTICLE_reportsCallback(reports) {
     console.log("Reports: ", reports);
-    if (reports) {
-        let text;
-        if (reports.views == 0) {
-            "This article has not been rated yet";
-        } else {
-            const percent = Math.floor(reports.reports/reports.views * 100 + 0.5)
-            console.log(percent);
-            text = reports.reports + " out of " + reports.views + " (" + percent + "%) have reported this article";
-        }
-
-        // REPORTICLE_inject(text, reports.recommendations);
-        REPORTICLE_inject(text, false);
+    let text;
+    if (reports == null || reports.views == 0) {
+        text = "This article has not been rated yet";
+    } else {
+        const percent = Math.floor(reports.reports/reports.views * 100 + 0.5)
+        console.log(percent);
+        text = reports.reports + " out of " + reports.views + " (" + percent + "%) have reported this article";
     }
+
+    // REPORTICLE_inject(text, reports.recommendations);
+    REPORTICLE_inject(text, false);
 }
 
 function REPORTICLE_cEl(type) {

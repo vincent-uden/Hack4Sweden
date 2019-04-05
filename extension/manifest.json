@@ -8,7 +8,9 @@
             "matches": [
                 "*://edition.cnn.com/*",
                 "*://www.foxnews.com/*",
-                "*://www.reddit.com/r/worldnews/comments/*"
+                "*://www.reddit.com/r/worldnews/comments/*",
+                "*://www.msnbc.com/*",
+                "*://www.nbcnews.com/*"
             ],
             "js": [
                 "communication.js",
