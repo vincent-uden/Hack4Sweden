@@ -5,34 +5,12 @@ setTimeout(REPORTICLE_view, 1000);
 function REPORTICLE_view() {
     if (REPORTICLE_currentURL == document.location.href) {
         const url = document.location.href;
-        if (!url.includes("www.facebook.com")) {
+        if (!url.includes("www.facebook.com") && document.location.pathname != "/") {
             REPORTICLE_getReports(url, REPORTICLE_reportsCallback);
             setTimeout(() => REPORTICLE_addView(REPORTICLE_currentURL), 500);
         }
-        // REPORTICLE_load();
     }
 }
-
-// function REPORTICLE_load() {
-    
-    
-//     // const reports = {
-//     //     "views": 400,
-//     //     "reports": 39,
-//     //     "percent": 10,
-//     //     "recommendations": [
-//     //         {
-//     //             "url": "https://www.google.com",
-//     //             "title": "Google"
-//     //         },
-//     //         {
-//     //             "url": "https://www.bing.com",
-//     //             "title": "Bing"
-//     //         }
-//     //     ]
-//     // };
-    
-// }
 
 function REPORTICLE_reportsCallback(reports) {
     console.log("Reports: ", reports);
