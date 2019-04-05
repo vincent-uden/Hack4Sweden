@@ -10,3 +10,4 @@ gem 'byebug'
 gem 'irb'
 
 gem 'faraday'
+gem 'async'
