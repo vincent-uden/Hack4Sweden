@@ -1,9 +1,9 @@
-const OUR_URL = "https://www.google.com";
+const OUR_URL = "http://localhost:9292";
 // Add the correct paths
 
 function NAME_getReports(url) {
     const xhr = new XMLHttpRequest();
-    xhr.open("get", OUR_URL);
+    xhr.open("get", OUR_URL + "/reports");
     xhr.setRequestHeader("REPORT_URL", url);
     xhr.onerror = () => alert("Could not reach server");
     xhr.onload = () => {
@@ -19,7 +19,7 @@ function NAME_getReports(url) {
 
 function NAME_report(url) {
     const xhr = new XMLHttpRequest();
-    xhr.open("post", OUR_URL);
+    xhr.open("post", OUR_URL + "/add_report");
     xhr.setRequestHeader("REPORT_URL", url);
     xhr.onerror = () => alert("Could not reach server");
     xhr.onload = () => {
@@ -34,7 +34,7 @@ function NAME_report(url) {
 
 function NAME_addView(url) {
     const xhr = new XMLHttpRequest();
-    xhr.open("post", OUR_URL);
+    xhr.open("post", OUR_URL + "/add_view");
     xhr.setRequestHeader("VIEW_URL", url);
     xhr.onerror = () => console.error("Could not reach server");
     xhr.onload = () => {

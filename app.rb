@@ -6,7 +6,7 @@ class App < Sinatra::Base
 
   get '/reports' do
     url = request.env["HTTP_REPORT_URL"]
-    JSON.generate (Database.execute "SELECT * FROM articles WHERE url = #{"\"" + url + "\""}")[0]
+    Database.execute("SELECT * FROM articles WHERE url = #{"\"" + url + "\""}")[0].to_json
   end
 
   post '/add_view' do
