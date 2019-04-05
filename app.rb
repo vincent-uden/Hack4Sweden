@@ -9,6 +9,23 @@ class App < Sinatra::Base
     JSON.generate (Database.execute "SELECT * FROM articles WHERE url = #{"\"" + url + "\""}")[0]
   end
 
+  get '/add_topic/:topic' do
+    topic = params["topic"]
+    p topic
+    Database.add_topic topic
+    "hello"
+  end
+
+  get '/set_topics' do
+    id = 2
+    topics = [
+      "Politics",
+      "Russia",
+      "Trump"
+    ]
+    Database.set_topics_for_article id, topics
+  end
+
   post '/add_view' do
     url = request.env["HTTP_VIEW_URL"]
     views = (Database.execute "SELECT views FROM articles WHERE url = #{"\"" + url + "\""}")[0]["views"]
