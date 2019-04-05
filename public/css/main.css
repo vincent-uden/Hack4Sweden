@@ -8,13 +8,15 @@
 
 body {
     width: 100vw;
-    overflow: hidden;
+    height: auto;
     background-color: #ffffff;
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
 }
 
 .menu {
+    z-index: 1;
     background-color: var(--dark-blue);
     height: 8vh;
     position: fixed;
@@ -117,7 +119,6 @@ h4 {
 button#download {
     background-color: var(--red);    
     border-radius: 7px;
-    margin-right: 40vw;
     width: 20vw;
     height: 14vh;
     margin-top: 10vh;
@@ -128,6 +129,7 @@ button#download {
     box-shadow: 0px 5px 5px 0px #00000077;
     transform: translateX(-50%);
     margin-left: 50%;
+    margin-right: 0;
 }
 
 button#download:hover {
@@ -148,10 +150,69 @@ button#down {
     box-shadow: 0px 5px 5px 0px #00000077;
     transform: translateX(-50%);
     margin-left: 50%;
+    margin-right: 0;
 }
 
 .arrow {
     text-align: center;    
     transform: translateX(-50%) translateY(-10vh);
     margin-left: 50%;
+}
+
+.front-page-text {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    padding: 7vw;
+    width: 88vw;
+    margin-right: 0 !important;
+    overflow-x: hidden;
+}
+
+.front-page-text * {
+    margin-right: 0 !important;
+}
+
+div.left {
+}
+
+h2.left {
+    font-family: 'Bree Serif', serif;
+    color: var(--dark-blue);
+    font-size: 60px;
+}
+
+p.left {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: var(--dark-blue);
+    font-size: 30px;
+    font-weight: 300;
+}
+
+div.right {
+
+}
+
+h2.right {
+    font-family: 'Bree Serif', serif;
+    color: var(--dark-blue);
+    text-align: right;
+    font-size: 60px;
+
+}
+
+p.right {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: var(--dark-blue);
+    font-size: 30px;
+    font-weight: 300;
+    text-align: right;
+}
+
+.blue-images {
+    width: 20vw;
+    height: auto; 
+    margin-left: 50%;
+    margin-top: 30%;
+    transform: translateX(-50%) translateY(-50%);
 }
