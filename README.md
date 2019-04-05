@@ -1,1 +1,2 @@
-# Hack4Sweden
+# Reporticle
+A chrome extension which crowd sources data about fake news and displays it to the users. It tracks views on specific news websites and readers can report the articles if they declare it's fake news. The information about the articles is displayed so the readers can see if it's most likely false.

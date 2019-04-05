@@ -3,8 +3,6 @@ class Database
   @db.results_as_hash = true
 
   def self.execute(*args)
-    p "EXECUTE"
-    p args
     @db.execute(args[0], args[1])
   end
 
@@ -32,5 +30,12 @@ class Database
     topic_labels.each do |topic_label|
       execute "INSERT INTO article_topic_relations (article_id, topic_id) VALUES (?, ?)", [article_id, topics_hash[topic_label]]
     end
+  end
+
+  def self.get_article_by_url(url)
+    query = "SELECT * FROM articles"
+    rows = execute query
+    rows.select! { |row| row["url"] == url }
+    rows
   end
 end
