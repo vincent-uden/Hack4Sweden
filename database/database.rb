@@ -9,4 +9,11 @@ class Database
   def self.db
     @db
   end
+
+  def self.get_article_by_url(url)
+    query = "SELECT * FROM articles"
+    rows = execute query
+    rows.select! { |row| row["url"] == url }
+    rows
+  end
 end
