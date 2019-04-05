@@ -1,16 +1,16 @@
 // CHANGE ALL FUNCTION NAMES TO HAVE THE EXTENSION NAME PREFIXED
 
-NAME_load();
-let currentURL = document.location.href;
-setTimeout(NAME_view, 10000);
+let REPORTICLE_currentURL = document.location.href;
+setTimeout(REPORTICLE_view, 1000);
 
-function NAME_view() {
-    if (currentURL == document.location.href) {
-        NAME_addView(currentURL);
+function REPORTICLE_view() {
+    if (REPORTICLE_currentURL == document.location.href) {
+        REPORTICLE_addView(REPORTICLE_currentURL);
+        REPORTICLE_load();
     }
 }
 
-function NAME_load() {
+function REPORTICLE_load() {
     const url = document.location.href;
     // const reports = NAME_getReports(url);
     const reports = {
@@ -18,8 +18,14 @@ function NAME_load() {
         "reports": 39,
         "percent": 10,
         "recommendations": [
-            "www.google.com",
-            "www.bing.com"
+            {
+                "url": "https://www.google.com",
+                "title": "Google"
+            },
+            {
+                "url": "https://www.bing.com",
+                "title": "Bing"
+            }
         ]
     };
 
@@ -31,40 +37,44 @@ function NAME_load() {
             text = reports.reports + " out of " + reports.views + " (" + reports.percent + "%) have reported this article";
         }
 
-        inject(text, reports.recommendations);
+        REPORTICLE_inject(text, reports.recommendations);
     }
 }
 
-function cEl(type) {
+function REPORTICLE_cEl(type) {
     return document.createElement(type);
 }
 
 
-function inject(text, recommendations) {
-    const div = document.createElement("div");
+function REPORTICLE_inject(text, recommendations) {
+    const div = REPORTICLE_cEl("div");
     div.id = "EXTENSION_WHOO_DIV";
     div.style = "width: 100%; background-color: #313131; padding: 15px; font-family: sans-serif; display:flex; flex-direction: row";
-    const div2 = document.createElement("div");
+    const div2 = REPORTICLE_cEl("div");
     div2.id = "EXTENSION_WHOO_DIV2";
-    const div3 = document.createElement("div");
+    const div3 = REPORTICLE_cEl("div");
     div3.id = "EXTENSION_WHOO_DIV3";
     div3.style = "padding: 5px; align-content: center;";
 
-    const parag = document.createElement("h4");
+    const parag = REPORTICLE_cEl("h4");
     parag.innerHTML = text;
     parag.style = "color: white; margin-bottom: 5px;";
-    const rdown = document.createElement("h6");
+    const rdown = REPORTICLE_cEl("h6");
     rdown.innerHTML = "Report for being factually incorrect";
     rdown.style = "background-color: red; cursor: pointer; padding: 5px; color: white;";
     rdown.onclick = rateDown;
 
-    const srcTitle = document.createElement("h6");
+    const srcTitle = REPORTICLE_cEl("h6");
     srcTitle.innerHTML = "Other sources";
     srcTitle.style = "color: white;";
-    const table = cEl("table");
+    const table = REPORTICLE_cEl("table");
+    table.style = "padding: 5px;"
     for (let rec of recommendations) {
-        const tr = cEl("tr");
-        tr.innerHTML = rec;
+        const tr = REPORTICLE_cEl("tr");
+        const link = REPORTICLE_cEl("a");
+        link.innerHTML = rec.title;
+        link.href = rec.url;
+        tr.appendChild(link)
         table.appendChild(tr);
     }
 
@@ -82,17 +92,17 @@ function inject(text, recommendations) {
     console.log("inject");
 }
 
-function deleteInjection() {
+function REPORTICLE_deleteInjection() {
     const div = document.getElementById("EXTENSION_WHOO_DIV");
     div.parentNode.removeChild(div);
 }
 
-function rateUp() {
+function REPORTICLE_rateUp() {
     console.log("UP!");
-    deleteInjection();
+    REPORTICLE_deleteInjection();
 }
 
 function rateDown() {
     console.log("DOWN!");
-    deleteInjection();
+    REPORTICLE_deleteInjection();
 }
