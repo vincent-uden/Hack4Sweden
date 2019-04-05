@@ -1,18 +1,27 @@
 {
     "manifest_version": 2,
-    "name": "Fake extension",
+    "name": "Reporticle",
     "version": "0.1",
     "description": "An extension for rating websites and getting other recommended sources",
     "content_scripts": [
         {
             "matches": [
                 "*://edition.cnn.com/*",
-                "*://www.foxnews.com/*"
+                "*://www.foxnews.com/*",
+                "*://www.reddit.com/r/worldnews/comments/*",
+                "*://www.msnbc.com/*",
+                "*://www.nbcnews.com/*",
+                "*://www.facebook.com/*"
             ],
             "js": [
                 "communication.js",
-                "ext.js"
+                "ext.js",
+                "facebook.js"
             ]
         }
+    ],
+    "permissions": [
+        "http://localhost:9292/*",
+        "*://*/*"
     ]
 }

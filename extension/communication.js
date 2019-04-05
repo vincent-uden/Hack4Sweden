@@ -1,15 +1,16 @@
-const OUR_URL = "https://www.google.com";
-// Add the correct paths
+const REPORTICLE_OUR_URL = "http://localhost:9292";
 
-function NAME_getReports(url) {
+// Gets the reports from the server (database)
+function REPORTICLE_getReports(url, callback, transfer, transfer2) {
     const xhr = new XMLHttpRequest();
-    xhr.open("get", OUR_URL);
+    xhr.open("get", REPORTICLE_OUR_URL + "/reports");
     xhr.setRequestHeader("REPORT_URL", url);
     xhr.onerror = () => alert("Could not reach server");
     xhr.onload = () => {
         if (xhr.status == 200) {
             const response = xhr.response;
-            return JSON.parse(response);
+            console.log(xhr.status, response);
+            callback(JSON.parse(response), transfer, transfer2);
         } else {
             alert("Error " + xhr.status);
         }
@@ -17,25 +18,34 @@ function NAME_getReports(url) {
     xhr.send();
 }
 
-function NAME_report(url) {
+// Send a report about a url (an article) being fake
+function REPORTICLE_report(url) {
     const xhr = new XMLHttpRequest();
-    xhr.open("post", OUR_URL);
+    xhr.open("post", REPORTICLE_OUR_URL + "/add_report");
     xhr.setRequestHeader("REPORT_URL", url);
     xhr.onerror = () => alert("Could not reach server");
     xhr.onload = () => {
-        if (xhr.status == 200) {
-            alert("Thank you!");
-        } else {
-            alert("Error " + xhr.status);
+        if (xhr.readyState === 4) {
+            if (xhr.status == 200) {
+                alert("Thank you! Your report has been sent.");
+            } else {
+                alert("Error " + xhr.status);
+            }
         }
     };
     xhr.send();
 }
 
-function NAME_addView(url) {
+
+// Adds a view to the database to be able to compare it with the reports
+function REPORTICLE_addView(url) {
+    const msg = {
+        "title": document.title,
+        "url": url
+    };
+
     const xhr = new XMLHttpRequest();
-    xhr.open("post", OUR_URL);
-    xhr.setRequestHeader("VIEW_URL", url);
+    xhr.open("post", REPORTICLE_OUR_URL + "/add_view");
     xhr.onerror = () => console.error("Could not reach server");
     xhr.onload = () => {
         if (xhr.status == 200) {
@@ -44,5 +54,5 @@ function NAME_addView(url) {
             console.error("Error " + xhr.status);
         }
     };
-    xhr.send();
+    xhr.send(JSON.stringify(msg));
 }

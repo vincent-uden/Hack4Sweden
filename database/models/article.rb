@@ -6,6 +6,7 @@ class Article < Table
   column :name, :string255, :no_null
   column :url, :string255, :no_null
   column :reports, :int
+  column :views, :int
 
   def initialize(db_hash)
     super()
@@ -14,6 +15,7 @@ class Article < Table
     set_name db_hash["name"]
     set_url db_hash["url"]
     set_reports db_hash["reports"]
+    set_views db_hash["views"]
     @db_hash = db_hash
   end
 end
