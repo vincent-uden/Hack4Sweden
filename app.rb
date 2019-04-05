@@ -51,6 +51,7 @@ class App < Sinatra::Base
       result = result[0]
       id = result["id"]
       views = 0
+      add_topics_to_article(id, url)
     end
     Database.execute "UPDATE articles SET views = #{views + 1} WHERE id = ?", id
   end
