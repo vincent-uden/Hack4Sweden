@@ -44,7 +44,10 @@ function addView() {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("POST", "/add_view", true);
     xmlHttp.setRequestHeader("VIEW_URL", 
-        "https://reddit.com/r/LateStageCapitalism"
+        "https://reddit.com/r/socialism"
+    );
+    xmlHttp.setRequestHeader("VIEW_TITLE", 
+        "Socialism"
     );
     xmlHttp.onload = function(e) {
         if (xmlHttp.readyState === 4) {
