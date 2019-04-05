@@ -1,7 +1,7 @@
 const REPORTICLE_OUR_URL = "http://localhost:9292";
 // Add the correct paths
 
-function REPORTICLE_getReports(url, callback) {
+function REPORTICLE_getReports(url, callback, transfer, transfer2) {
     const xhr = new XMLHttpRequest();
     xhr.open("get", REPORTICLE_OUR_URL + "/reports");
     xhr.setRequestHeader("REPORT_URL", url);
@@ -10,7 +10,7 @@ function REPORTICLE_getReports(url, callback) {
         if (xhr.status == 200) {
             const response = xhr.response;
             console.log(xhr.status, response);
-            callback(JSON.parse(response));
+            callback(JSON.parse(response), transfer, transfer2);
         } else {
             alert("Error " + xhr.status);
         }
@@ -36,11 +36,16 @@ function REPORTICLE_report(url) {
 }
 
 function REPORTICLE_addView(url) {
+    const msg = {
+        "title": document.title,
+        "url": url
+    };
+
     const xhr = new XMLHttpRequest();
     xhr.open("post", REPORTICLE_OUR_URL + "/add_view");
-    xhr.setRequestHeader("VIEW_URL", url);
-    console.log(document.title);
-    xhr.setRequestHeader("VIEW_TITLE", document.title);
+    // xhr.setRequestHeader("VIEW_URL", url);
+    // console.log(document.title);
+    // xhr.setRequestHeader("VIEW_TITLE", String(document.title));
     xhr.onerror = () => console.error("Could not reach server");
     xhr.onload = () => {
         if (xhr.status == 200) {
@@ -49,5 +54,5 @@ function REPORTICLE_addView(url) {
             console.error("Error " + xhr.status);
         }
     };
-    xhr.send();
+    xhr.send(JSON.stringify(msg));
 }
