@@ -1,0 +1,12 @@
+{
+    "from extension to server": "url",
+    "from server to extension": {
+        "url": "https://www.foxnews.com/",
+        "reports": 456,
+        "percent": 99,
+        "views": 457,
+        "alternative": [
+            "https://www.cnn.com/"
+        ]
+    }
+}

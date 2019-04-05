@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "Fake extension",
+    "version": "0.1",
+    "description": "An extension for rating websites and getting other recommended sources",
+    "content_scripts": [
+        {
+            "matches": [
+                "*://edition.cnn.com/*",
+                "*://www.foxnews.com/*"
+            ],
+            "js": [
+                "communication.js",
+                "ext.js"
+            ]
+        }
+    ]
+}
