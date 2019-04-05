@@ -228,3 +228,33 @@ p.right {
     color: var(--blue-tinted-white);
     font-family: 'Source Sans Pro', sans-serif;
 }
+
+#data {
+    color: var(--dark-blue);
+    font-size: 120px;
+}
+
+#data-div {
+    background-image: url("/img/dataPink.png");
+    width: 30vw; 
+    height: 40vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+#data-div {
+    display: inline-block;
+}
+
+#data-text-div {
+    display: inline-block;
+    width: 45vw;
+    height: auto;
+    margin-right: 5vw;
+    float: right;
+}
+
+.row1 {
+    margin-top: 20vh;
+}
