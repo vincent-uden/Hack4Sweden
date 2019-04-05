@@ -1,5 +1,3 @@
-// CHANGE ALL FUNCTION NAMES TO HAVE THE EXTENSION NAME PREFIXED
-
 let REPORTICLE_currentURL = document.location.href;
 setTimeout(REPORTICLE_view, 1000);
 
@@ -12,7 +10,7 @@ function REPORTICLE_view() {
 
 function REPORTICLE_load() {
     const url = document.location.href;
-    // const reports = NAME_getReports(url);
+    // const reports = REPORTICLE_getReports(url);
     const reports = {
         "views": 400,
         "reports": 39,
@@ -62,7 +60,7 @@ function REPORTICLE_inject(text, recommendations) {
     const rdown = REPORTICLE_cEl("h6");
     rdown.innerHTML = "Report for being factually incorrect";
     rdown.style = "background-color: red; cursor: pointer; padding: 5px; color: white;";
-    rdown.onclick = rateDown;
+    rdown.onclick = REPORTICLE_reportArticle;
 
     const srcTitle = REPORTICLE_cEl("h6");
     srcTitle.innerHTML = "Other sources";
@@ -97,12 +95,8 @@ function REPORTICLE_deleteInjection() {
     div.parentNode.removeChild(div);
 }
 
-function REPORTICLE_rateUp() {
-    console.log("UP!");
-    REPORTICLE_deleteInjection();
-}
-
-function rateDown() {
+function REPORTICLE_reportArticle() {
     console.log("DOWN!");
     REPORTICLE_deleteInjection();
+    REPORTICLE_report(document.location.href);
 }

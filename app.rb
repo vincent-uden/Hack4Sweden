@@ -6,7 +6,15 @@ class App < Sinatra::Base
 
   get '/reports' do
     url = request.env["HTTP_REPORT_URL"]
-    Database.execute("SELECT * FROM articles WHERE url = #{"\"" + url + "\""}")[0].to_json
+    articles = Database.execute("SELECT * FROM articles")
+    articles.select! { |row| row["url"] == url}
+    resp = {
+      url: articles[0]["url"],
+      title: articles[0]["name"]
+    }.to_json
+    p "RESP: #{resp}"
+    # return resp
+    return "RESPONSE!!!!!!"
   end
 
   post '/add_view' do
@@ -32,6 +40,7 @@ class App < Sinatra::Base
     Database.execute "UPDATE articles SET views = #{views + 1} WHERE id = ?", id
   end
 
+  # TODO! NO WORKIE!!!!! IT GO NIL[] ERROR
   post '/add_report' do
     url = request.env["HTTP_REPORT_URL"]
     reports = (Database.execute "SELECT reports FROM articles WHERE url = #{"\"" + url + "\""}")[0]["reports"]

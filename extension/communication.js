@@ -9,6 +9,7 @@ function REPORTICLE_getReports(url) {
     xhr.onload = () => {
         if (xhr.status == 200) {
             const response = xhr.response;
+            console.log(xhr.status, response);
             return JSON.parse(response);
         } else {
             alert("Error " + xhr.status);
