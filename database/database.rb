@@ -38,4 +38,22 @@ class Database
     rows.select! { |row| row["url"] == url }
     rows
   end
+
+  def self.get_related_by_url(url)
+    article = get_article_by_url(url)[0]
+    if article
+      topics = execute "SELECT topic_id FROM article_topic_relations WHERE article_id = ?", article["id"]
+      topic_ids = topics.map { |topic| topic["topic_id"] }[0..2]
+
+      related = []
+      topic_ids.each do |id|
+        related.concat (execute "SELECT article_id FROM article_topic_relations WHERE topic_id = ?", id).map { |r| r["article_id"] }
+      end
+      related.uniq!
+      related.delete(article["id"])
+      samples = related.sample(3)
+
+      execute "SELECT * FROM articles WHERE id = ? OR id = ? OR id = ?", samples
+    end
+  end
 end

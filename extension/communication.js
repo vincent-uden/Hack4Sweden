@@ -9,7 +9,7 @@ function REPORTICLE_getReports(url, callback, transfer, transfer2) {
     xhr.onload = () => {
         if (xhr.status == 200) {
             const response = xhr.response;
-            console.log(xhr.status, response);
+            // console.log(xhr.status, response);
             callback(JSON.parse(response), transfer, transfer2);
         } else {
             alert("Error " + xhr.status);

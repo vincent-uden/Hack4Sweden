@@ -22,18 +22,19 @@ function REPORTICLE_view() {
 // Callback for when the article reports are received from the server
 // Formats the data for display
 function REPORTICLE_reportsCallback(reports) {
-    console.log("Reports: ", reports);
+    // console.log("Reports: ", reports);
     let text;
     if (reports == null || reports.views == 0) {
         text = "This article has not been rated yet";
     } else {
         const percent = Math.floor(reports.reports/reports.views * 100 + 0.5)
-        console.log(percent);
+        // console.log(percent);
         text = reports.reports + " out of " + reports.views + " (" + percent + "%) have reported this article";
     }
 
-    // REPORTICLE_inject(text, reports.recommendations);
-    REPORTICLE_inject(text, false);
+    console.log("Recommendations:", reports.recommendations);
+    REPORTICLE_inject(text, reports.recommendations);
+    // REPORTICLE_inject(text, false);
 }
 
 // Short function for document.createElement()
@@ -68,12 +69,12 @@ function REPORTICLE_inject(text, recommendations, element, url) {
     rdown.style = "background-color: #E63946; cursor: pointer; padding: 5px; color: white; border-radius: 10px; border: 5px solid #E63946; display: inline-block; box-shadow: 0px 2px 5px 0px #00000057; margin-left: 15px; margin-bottom: 15px; margin-top: 5px;";
     rdown.onclick = () => REPORTICLE_reportArticle(id, url);
 
-    if (recommendations) {
+    if (recommendations.length > 0) {
         const srcTitle = REPORTICLE_cEl("h6");
-        srcTitle.innerHTML = "Other sources";
-        srcTitle.style = "color: white;";
+        srcTitle.innerHTML = "Related articles";
+        // srcTitle.style = "color: white;";
         const table = REPORTICLE_cEl("table");
-        table.style = "padding: 5px;"
+        table.style = "padding: 5px;";
         // Create table with all recommendations
         for (let rec of recommendations) {
             const tr = REPORTICLE_cEl("tr");

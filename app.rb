@@ -12,7 +12,12 @@ class App < Sinatra::Base
     articles = Database.execute("SELECT * FROM articles")
     articles.select! { |row| row["url"] == url}
     response.headers["Access-Control-Allow-Origin"] = "*"
-    articles[0].to_json
+    r = articles[0]
+    if r
+      r["recommendations"] = Database.get_related_by_url(url)
+    end
+    p r
+    r.to_json
   end
 
   # VINCENTTTT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
@@ -32,6 +37,14 @@ class App < Sinatra::Base
       "Trump"
     ]
     Database.set_topics_for_article id, topics
+  end
+
+  get '/test' do
+    Database.get_related_by_url("https://edition.cnn.com/2019/04/03/politics/donald-trump-fox-news-rupert-murdoch/index.html")
+  end
+
+  get '/test2' do
+    Database.get_related_by_url("https://edition.cnn.com/2019/04/05/europe/germany-cocaine-aldi-ger-scli-intl/")
   end
 
   # Add a view to the database
