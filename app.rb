@@ -5,6 +5,7 @@ class App < Sinatra::Base
   end
 
   get "/stats" do
+      @articles = Database.execute "SELECT * FROM articles"
       slim :stats
   end
 

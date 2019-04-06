@@ -256,5 +256,104 @@ p.right {
 }
 
 .row1 {
-    margin-top: 20vh;
+    margin-top: 30vh;
+}
+
+#down2 {
+    margin-top: 12vh;
+}
+
+#browse-data {
+    color: var(--dark-blue);
+    font-family: 'Bree Serif', serif;
+    font-size: 45px;
+    margin-left: 5vw;
+    margin-top: 10vh;
+}
+
+#drop-down {
+    margin-left: 3.5vw;
+}
+
+#order {
+    width: 24vw;
+    height: 7vh;
+    margin: 30px; 
+    color: var(--dark-blue);
+    background-color: #ffffff;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding-left: 10px;
+    font-size: 20px;
+    border: 1px solid var(--dark-blue);
+    font-weight: 300;
+}
+
+#time-frame {
+    width: 24vw;
+    height: 7vh;
+    margin: 30px;
+    color: var(--dark-blue);
+    background-color: #ffffff;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding-left: 10px;
+    font-size: 20px;
+    border: 1px solid var(--dark-blue);
+    font-weight: 300;
+}
+
+.drop-down-button {
+    width: 18vw !important;
+    height: 7vh !important;
+    margin: 30px !important;
+    color: var(--dark-blue) !important;
+    background-color: #ffffff !important;
+    font-family: 'Source Sans Pro', sans-serif !important;
+    padding-left: 10px !important;
+    font-size: 20px !important;
+    border: 1px solid var(--dark-blue) !important;
+    font-weight: 300 !important;
+    transform: none !important;
+}
+
+body #drop-down .drop-down-button:active {
+    transform: translateY(5px) translateX(0px) !important;
+}
+
+table {
+    border-collapse: collapse;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+tr.article {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+tr.article1 {
+    height: 15px;
+}
+
+td.article {
+    border-left: 2px solid var(--dark-blue);
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    color: var(--dark-blue);
+}
+
+td.article a {
+    text-decoration: none;
+    color: var(--dark-blue);
+}
+
+td.number {
+    text-align: right;
+}
+
+td.header {
+    font-size: 28px;
 }
