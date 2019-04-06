@@ -46,5 +46,5 @@ function REPORTICLE_facebookCallback(reports, element, url) {
         text = reports.reports + " out of " + reports.views + " (" + percent + "%) have reported this article";
     }
     
-    REPORTICLE_inject(text, null, element, url);  
+    REPORTICLE_inject(text, reports.recommendations, element, url);  
 }
