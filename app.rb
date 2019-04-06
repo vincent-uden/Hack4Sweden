@@ -4,6 +4,11 @@ class App < Sinatra::Base
     slim :index
   end
 
+  get "/stats" do
+      @articles = Database.execute "SELECT * FROM articles"
+      slim :stats
+  end
+
   # --- API STUFF ---
 
   # Get reports for an article or post based on a url
