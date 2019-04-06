@@ -2,12 +2,13 @@ doctype html
 html
     head
         title Reporticle
+        link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32"
         link href="https://fonts.googleapis.com/css?family=Bree+Serif|Source+Sans+Pro:300,400" rel="stylesheet"
         link rel="stylesheet" type="text/css" href="/css/main.css"
     body
-        div.menu
-            img#menu-icon src="/img/articleWhite.png" alt="article"
-            h4#menu-text Reporticle
+        div.menu 
+            img#menu-icon src="/img/articleWhite.png" alt="article" onclick="navigate(index_url)"
+            h4#menu-text onclick="navigate(index_url)" Reporticle
             div.stats-red onclick="navigate(stats_url)"
                 img#stats-icon src="/img/statsWhite.png" alt="stats"
         == yield
