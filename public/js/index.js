@@ -66,6 +66,7 @@ function addView() {
 
 const stats_url = "/stats";
 const github_url = "https://github.com/vincent-uden/Hack4Sweden";
+const index_url = "/";
 
 function navigate(url) {
     window.location.href = url;
